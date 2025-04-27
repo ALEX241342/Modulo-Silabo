@@ -1,10 +1,10 @@
-package com.microservice.microservicio_registrar_nuevo_silabo;
+package com.microservicio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MicroservicioRegistrarNuevoSilaboApplicationTests {
+class MicroservicioSilaboApplicationTests {
 
 	@Test
 	void contextLoads() {
