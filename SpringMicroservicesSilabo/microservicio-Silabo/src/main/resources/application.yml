@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: microservicio-Silabo
+
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/proyecto_web
+    username: ${env.DB_USER}
+    password: ${env.DB_PASSWORD}
+    pool:
+      enabled: true
+      max-size: 10
