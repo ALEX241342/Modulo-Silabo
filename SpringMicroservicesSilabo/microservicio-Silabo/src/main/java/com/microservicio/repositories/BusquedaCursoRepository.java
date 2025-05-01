@@ -2,15 +2,16 @@ package com.microservicio.repositories;
 
 import com.microservicio.dtos.DTOBusquedaDatosCurso;
 import com.microservicio.dtos.DTODatosNombreCurso;
+import com.microservicio.entities.MinimoCurso;
 import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface BusquedaCursoRepository {
+public interface BusquedaCursoRepository extends R2dbcRepository<MinimoCurso,Long> {
 
-    // Buscar por código exacto (case-insensitive)
     @Query("""
             SELECT codigo AS codigoCurso,
             nombre AS nombreCurso,

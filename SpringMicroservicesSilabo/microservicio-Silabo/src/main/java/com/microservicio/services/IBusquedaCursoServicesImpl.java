@@ -2,7 +2,6 @@ package com.microservicio.services;
 
 import com.microservicio.dtos.DTOBusquedaDatosCurso;
 import com.microservicio.dtos.DTODatosNombreCurso;
-import com.microservicio.entities.MinimoCurso;
 import com.microservicio.repositories.BusquedaCursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +9,10 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class BusquedaCursoServiceImpl implements BusquedaCursoService {
+public class IBusquedaCursoServicesImpl implements IBusquedaCursoServices {
 
     @Autowired
-    BusquedaCursoRepository busquedaCursoRepository;
+    private BusquedaCursoRepository busquedaCursoRepository;
 
     @Override
     public Mono<DTOBusquedaDatosCurso> buscarPorCodigoCurso(String codigoCurso) {

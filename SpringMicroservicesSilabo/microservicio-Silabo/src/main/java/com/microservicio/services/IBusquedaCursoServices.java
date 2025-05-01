@@ -5,7 +5,7 @@ import com.microservicio.dtos.DTODatosNombreCurso;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface BusquedaCursoService {
+public interface IBusquedaCursoServices {
 
     //metodos para busqueda de cursos (GS)
 
