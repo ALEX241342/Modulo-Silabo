@@ -3,7 +3,7 @@ package com.microservicio.dtos;
 import lombok.Data;
 
 @Data
-public class DTOMinDatosCurso {
+public class DTODatosNombreCurso {
     Long id;
     String codigoCurso;
     String nombreCurso;

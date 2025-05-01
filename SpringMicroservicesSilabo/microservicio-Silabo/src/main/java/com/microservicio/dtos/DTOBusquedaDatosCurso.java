@@ -7,12 +7,11 @@ import java.math.BigDecimal;
 
 
 @Data
-public class DTODetallesBusquedaCurso {
-    Long id;
+public class DTOBusquedaDatosCurso {
     String codigoCurso;
     String nombreCurso;
-    String anio;
     String numeroPeriodo;
+    String anio;
     String ciclo;
     BigDecimal numeroDeCreditos;
     String planDeEstudios;

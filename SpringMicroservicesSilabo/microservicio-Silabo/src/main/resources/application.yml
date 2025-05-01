@@ -1,6 +1,8 @@
 spring:
   application:
     name: microservicio-Silabo
+  config:
+    import: optional:configserver:http://localhost:8888
 
   r2dbc:
     url: r2dbc:mysql://localhost:3306/proyecto_web
