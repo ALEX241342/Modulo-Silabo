@@ -3,9 +3,11 @@ package com.microservicio.repositories;
 import com.microservicio.dtos.DTOBusquedaDatosCurso;
 import com.microservicio.dtos.DTODatosNombreCurso;
 import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Repository
 public interface BusquedaCursoRepository {
 
     // Buscar por código exacto (case-insensitive)

@@ -5,9 +5,11 @@ import com.microservicio.dtos.DTODatosNombreCurso;
 import com.microservicio.entities.MinimoCurso;
 import com.microservicio.repositories.BusquedaCursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Service
 public class BusquedaCursoServiceImpl implements BusquedaCursoService {
 
     @Autowired
