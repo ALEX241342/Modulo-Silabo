@@ -11,14 +11,19 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("api/busqueda-curso")
+@RequestMapping("/api/busqueda-curso")
 public class BusquedaCursoController {
 
     @Autowired
     private IBusquedaCursoServices cursoService;
 
+    @GetMapping("/")
+    public Mono<String> defaultHome(){
+        return Mono.just("Bienvenido a mi API Reactiva");
+    }
+
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/{codigo}")
+    @GetMapping("/codigo/{codigo}")
     public Mono<DTOBusquedaDatosCurso> encontrarCursoPorCodigo(@PathVariable String codigo){
         return cursoService
                 .buscarPorCodigoCurso(codigo)

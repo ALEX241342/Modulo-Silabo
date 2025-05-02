@@ -9,20 +9,26 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 @Repository
 public interface BusquedaCursoRepository extends R2dbcRepository<MinimoCurso,Long> {
 
+    @Query("SELECT * FROM vw_busqueda_de_curso WHERE codigo = :codigo LIMIT 1")
+    Mono<Map<String, Object>> debugRawData(String codigo);
+
     @Query("""
-            SELECT codigo AS codigoCurso,
-            nombre AS nombreCurso,
-            numero_periodo as numeroPeriodo,
-            año as anio,
+            SELECT codigo,
+            nombre,
+            numero_periodo,
+            año,
             ciclo,
-            creditos as numeroDeCreditos,
-            plan_estudios as planDeEstudios,
-            tipo as tipoDeCurso
+            creditos,
+            plan_estudios,
+            tipo
             FROM vw_busqueda_de_curso
             WHERE LOWER(codigo) = LOWER(:codigo)
+            LIMIT 1
             """)
     Mono<DTOBusquedaDatosCurso> buscarPorCodigoCurso(String codigo);
 
