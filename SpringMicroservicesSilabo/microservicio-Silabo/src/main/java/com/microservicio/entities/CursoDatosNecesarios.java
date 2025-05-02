@@ -1,14 +1,11 @@
 package com.microservicio.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Data
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "curso")
 public class CursoDatosNecesarios {
     @Id
@@ -19,7 +16,7 @@ public class CursoDatosNecesarios {
     private int numeroHorasTeoria;
     private int numeroHorasPractica;
     private String ciclo;
-    private String sumilla;
+    @Setter private String sumilla;
     private float numeroCreditos;
-    private String modalidad;
+    @Setter private String modalidad;
 }

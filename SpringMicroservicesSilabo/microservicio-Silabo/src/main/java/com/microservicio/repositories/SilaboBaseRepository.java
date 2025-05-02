@@ -12,8 +12,8 @@ public interface SilaboBaseRepository extends R2dbcRepository<SilaboBase,Long> {
 
     Mono<Boolean> existsByNombreDocumento(String nombreDocumento);
 
-     default Mono<SilaboBase> guardarSoloNombre(String nombreDocumento) {
-        return save(new SilaboBase(nombreDocumento));
+    default Mono<SilaboBase> guardarSoloNombre(String nombreDocumento,Long idCurso) {
+        return save(new SilaboBase(nombreDocumento,idCurso));
     }
 
 
