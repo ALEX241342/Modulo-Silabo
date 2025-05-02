@@ -10,10 +10,13 @@ spring:
     password: ${DB_PASSWORD}
     pool:
       enabled: true
-      max-size: 10
+      max-size: 20
   cloud:
     discovery:
       enabled: false  # Desactiva el registro en Eureka
+  webflux:
+    format:
+      streaming: true
 eureka:
   client:
     enabled: false    # Desactiva el cliente Eureka
@@ -21,3 +24,7 @@ eureka:
     fetch-registry: false
   server:
     enabled: false
+
+
+
+

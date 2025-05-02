@@ -33,7 +33,7 @@ public class BusquedaCursoController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping()
+    @GetMapping("/nombre")
     public Flux<DTODatosNombreCurso> listarCursosPorParteDelNombre(@RequestParam (name = "nombre",required = true) String parteNombre){
         return cursoService.buscarPorNombreCursos(parteNombre);
     }
@@ -41,7 +41,7 @@ public class BusquedaCursoController {
     // el nombre sera escogido de la lista de cursos pero cuando se envie
     //como solicitud llegara como id
     @GetMapping("/{id}")
-    Mono<DTOBusquedaDatosCurso> encontrarCursoPorNombreCursoElegido(@PathVariable Long id){
+    public Mono<DTOBusquedaDatosCurso> encontrarCursoPorNombreCursoElegido(@PathVariable Long id){
         return cursoService.buscarCodigoPorNombre(id).flatMap(
                 codigo -> cursoService.buscarPorCodigoCurso(codigo)
         ).switchIfEmpty(Mono.error(

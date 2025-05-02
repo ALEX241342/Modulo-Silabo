@@ -41,16 +41,17 @@ public interface BusquedaCursoRepository extends R2dbcRepository<MinimoCurso,Lon
     @Query("""
             SELECT
             id,
-            codigo AS codigoCurso,
-            nombre AS nombreCurso,
-            plan_estudios as planDeEstudios
+            codigo,
+            nombre,
+            plan_estudios
             FROM vw_busqueda_de_curso
             WHERE
             LOWER(nombre) LIKE LOWER(CONCAT(:parteNombreCurso, '%'))
-            LIMIT 5
             """)
     Flux<DTODatosNombreCurso> listarOpcionesPorNombreCurso(String parteNombreCurso);
 
+
+    // cuando seleccione el nombre de un curso, se enviara el id correspondiente al nombre de escogido
     @Query("SELECT codigo FROM curso WHERE id = :id")
     Mono<String> buscarCodigoPorNombre(Long id);
 
