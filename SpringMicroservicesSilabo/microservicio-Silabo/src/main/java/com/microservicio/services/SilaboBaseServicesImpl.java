@@ -21,7 +21,7 @@ public class SilaboBaseServicesImpl implements ISilaboBaseService{
     }
 
     @Override
-    public Mono<SilaboBase> asignarNombreAlNuevoSilabo(String nombreDocumento) {
-        return silaboBaseRepository.guardarSoloNombre(nombreDocumento);
+    public Mono<SilaboBase> crearNuevoSilaboConNombre(String nombreDocumento, Long idCurso) {
+        return silaboBaseRepository.guardarSoloNombre(nombreDocumento,idCurso);
     }
 }

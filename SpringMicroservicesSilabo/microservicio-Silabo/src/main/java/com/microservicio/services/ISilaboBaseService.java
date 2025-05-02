@@ -13,6 +13,6 @@ public interface ISilaboBaseService {
     // guardar Informacion General Silabo
     Mono<SilaboBase> guardarSilaboIG(Long id, String areaDeEstudio, String nombreDocente, String emailDocente);
 
-    Mono<SilaboBase> asignarNombreAlNuevoSilabo(String nombreDocumento);
+    Mono<SilaboBase> crearNuevoSilaboConNombre(String nombreDocumento, Long idCurso);
 
 }

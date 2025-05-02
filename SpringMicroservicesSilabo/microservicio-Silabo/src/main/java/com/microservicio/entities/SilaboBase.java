@@ -16,21 +16,29 @@ public class SilaboBase {
     private Long idSilabo;
     @Column("nombre_documento")
     @Setter private String nombreDocumentoSilabo;
+    @Column("area_estudios")
     @Setter private String areaEstudios;
+    @Column("descripcion_silabo")
     @Setter private String descripcionSilabo;
+    @Column("estrategia_didactica")
     @Setter private String estrategiaDidactica;
+    @Column("bibliografia")
     @Setter private String bibliografia;
-
+    @Column("fecha_creacion")
     private LocalDateTime fechaCreacion;
+    @Column("fecha_u_modificacion")
     private LocalDateTime ultimafechaModificacion;
 
     @Column("cursoid")
     @Setter private Long idCurso;
-    @Setter private int cantidaUnidades;
+    @Column("cantidad_unidades")
+    @Setter private int cantidadUnidades;
+    @Column("nombre_completo_profesor")
     @Setter private String nombreCompletoDocente;
+    @Column("email_profesor")
     @Setter private String emailDocente;
 
-    public SilaboBase(String nombreDocumentoSilabo, Long idCurso ) {
+    public SilaboBase(String nombreDocumentoSilabo, Long idCurso) {
         this.nombreDocumentoSilabo = nombreDocumentoSilabo;
         this.idCurso = idCurso;
     }
