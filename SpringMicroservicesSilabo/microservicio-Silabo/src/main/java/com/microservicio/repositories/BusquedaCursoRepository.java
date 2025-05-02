@@ -2,7 +2,7 @@ package com.microservicio.repositories;
 
 import com.microservicio.dtos.DTOBusquedaDatosCurso;
 import com.microservicio.dtos.DTODatosNombreCurso;
-import com.microservicio.entities.MinimoCurso;
+import com.microservicio.entities.CursoDatosNecesarios;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 import java.util.Map;
 
 @Repository
-public interface BusquedaCursoRepository extends R2dbcRepository<MinimoCurso,Long> {
+public interface BusquedaCursoRepository extends R2dbcRepository<CursoDatosNecesarios,Long> {
 
     @Query("SELECT * FROM vw_busqueda_de_curso WHERE codigo = :codigo LIMIT 1")
     Mono<Map<String, Object>> debugRawData(String codigo);

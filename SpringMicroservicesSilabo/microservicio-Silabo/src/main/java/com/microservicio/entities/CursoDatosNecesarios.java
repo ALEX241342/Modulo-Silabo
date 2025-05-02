@@ -10,7 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "curso")
-public class MinimoCurso {
+public class CursoDatosNecesarios {
     @Id
     private Long idCurso;
     private String codigoCurso;
