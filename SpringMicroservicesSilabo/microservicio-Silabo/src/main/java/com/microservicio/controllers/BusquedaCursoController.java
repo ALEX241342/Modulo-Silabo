@@ -2,7 +2,7 @@ package com.microservicio.controllers;
 
 import com.microservicio.dtos.DTOBusquedaDatosCurso;
 import com.microservicio.dtos.DTODatosNombreCurso;
-import com.microservicio.services.IBusquedaCursoServices;
+import com.microservicio.services.serviceBusquedaCurso.IBusquedaCursoServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

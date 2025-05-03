@@ -1,4 +1,4 @@
-package com.microservicio.services;
+package com.microservicio.services.serviceCursoPrerrequisito;
 
 import com.microservicio.entities.CursoPrerrequisito;
 import com.microservicio.repositories.CursoPrerrequisitoRepository;
@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class CursoPrerrequisitoServicesImpl implements ICursoPrerrequisitoServices{
+public class CursoPrerrequisitoServicesImpl implements ICursoPrerrequisitoServices {
 
     @Autowired
     private CursoPrerrequisitoRepository cursoPrerrequisitoRepository;

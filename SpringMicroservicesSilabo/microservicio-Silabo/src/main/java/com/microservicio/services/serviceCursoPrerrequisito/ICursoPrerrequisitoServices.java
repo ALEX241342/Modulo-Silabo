@@ -1,4 +1,4 @@
-package com.microservicio.services;
+package com.microservicio.services.serviceCursoPrerrequisito;
 
 import com.microservicio.entities.CursoPrerrequisito;
 import reactor.core.publisher.Flux;

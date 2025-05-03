@@ -1,4 +1,4 @@
-package com.microservicio.services;
+package com.microservicio.services.serviceCurso;
 
 import com.microservicio.entities.CursoDatosNecesarios;
 import reactor.core.publisher.Mono;

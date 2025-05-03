@@ -1,4 +1,4 @@
-package com.microservicio.services;
+package com.microservicio.services.serviceCurso;
 
 import com.microservicio.entities.CursoDatosNecesarios;
 import com.microservicio.repositories.CursoDatosNecesariosRepository;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class CursoDatosNecesariosServicesImpl implements ICursoDatosNecesariosServices{
+public class CursoDatosNecesariosServicesImpl implements ICursoDatosNecesariosServices {
 
     @Autowired
     CursoDatosNecesariosRepository cursoRepository;

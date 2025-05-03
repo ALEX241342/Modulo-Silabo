@@ -1,4 +1,4 @@
-package com.microservicio.services;
+package com.microservicio.services.serviceSilabo;
 
 import com.microservicio.entities.SilaboBase;
 import reactor.core.publisher.Mono;

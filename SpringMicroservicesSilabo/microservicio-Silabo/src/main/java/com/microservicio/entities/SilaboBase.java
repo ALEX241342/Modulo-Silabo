@@ -13,8 +13,9 @@ import java.time.LocalDateTime;
 @Table(name = "silabo")
 public class SilaboBase {
     @Id
+    @Column("id_silabo")
     private Long idSilabo;
-    @Column("nombre_documento")
+    @Column("nombre_documento_silabo")
     @Setter private String nombreDocumentoSilabo;
     @Column("area_estudios")
     @Setter private String areaEstudios;
@@ -24,6 +25,7 @@ public class SilaboBase {
     @Setter private String estrategiaDidactica;
     @Column("bibliografia")
     @Setter private String bibliografia;
+
     @Column("fecha_creacion")
     private LocalDateTime fechaCreacion;
     @Column("fecha_u_modificacion")
@@ -32,7 +34,7 @@ public class SilaboBase {
     @Column("cursoid")
     @Setter private Long idCurso;
     @Column("cantidad_unidades")
-    @Setter private int cantidadUnidades;
+    @Setter private Integer cantidadUnidades;
     @Column("nombre_completo_profesor")
     @Setter private String nombreCompletoDocente;
     @Column("email_profesor")

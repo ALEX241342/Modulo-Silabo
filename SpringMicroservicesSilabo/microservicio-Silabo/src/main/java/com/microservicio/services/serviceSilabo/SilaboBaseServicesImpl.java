@@ -1,11 +1,13 @@
-package com.microservicio.services;
+package com.microservicio.services.serviceSilabo;
 
 import com.microservicio.entities.SilaboBase;
 import com.microservicio.repositories.SilaboBaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-public class SilaboBaseServicesImpl implements ISilaboBaseService{
+@Service
+public class SilaboBaseServicesImpl implements ISilaboBaseService {
 
     @Autowired
     private SilaboBaseRepository silaboBaseRepository;

@@ -1,4 +1,4 @@
-package com.microservicio.services;
+package com.microservicio.services.serviceBusquedaCurso;
 
 import com.microservicio.dtos.DTOBusquedaDatosCurso;
 import com.microservicio.dtos.DTODatosNombreCurso;
