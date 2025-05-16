@@ -11,7 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/busqueda-curso")
+@RequestMapping("/busqueda-curso")
 public class BusquedaCursoController {
 
     @Autowired
@@ -34,13 +34,13 @@ public class BusquedaCursoController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/nombre")
-    public Flux<DTODatosNombreCurso> listarCursosPorParteDelNombre(@RequestParam (name = "nombre",required = true) String parteNombre){
+    public Flux<DTODatosNombreCurso> listarCursosPorParteDelNombre(@RequestParam (name = "parte",required = true) String parteNombre){
         return cursoService.buscarPorNombreCursos(parteNombre);
     }
 
     // el nombre sera escogido de la lista de cursos pero cuando se envie
     //como solicitud llegara como id
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Mono<DTOBusquedaDatosCurso> encontrarCursoPorNombreCursoElegido(@PathVariable Long id){
         return cursoService.buscarCodigoPorNombre(id).flatMap(
                 codigo -> cursoService.buscarPorCodigoCurso(codigo)

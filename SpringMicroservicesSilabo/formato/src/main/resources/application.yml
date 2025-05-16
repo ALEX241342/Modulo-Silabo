@@ -1,5 +1,3 @@
-
-spring.application.name: formato
 spring:
   application:
     name: formato-service
@@ -12,5 +10,27 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  #server:
-  #  port: 8081
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+logging:
+  level:
+    root: INFO
+    com.silabo.formato: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+eureka:
+  #######################
+  client:
+    enabled: true    # Desactiva el cliente Eureka
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 8081
+  #######################
+  

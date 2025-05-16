@@ -1,60 +1,107 @@
 package com.silabo.formato;
 import com.silabo.entidades.Silabo;
-import com.silabo.entidades.Curso;
 import com.silabo.repositorio.SilaboRepository;
+import com.silabo.repositorio.SilaboCustomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 @Service
 public class DocumentoService {
+    private static final Logger logger = LoggerFactory.getLogger(DocumentoService.class);
 
     @Autowired
     private SilaboRepository silaboRepository;
 
-
+    @Autowired
+    private SilaboCustomRepository silaboCustomRepository;
 
     public Map<String, Object> datosDesdeBD(int IdSilabo) {
-        Silabo silabo = silaboRepository.findByIdSilabo(IdSilabo)
-                .orElseThrow(() -> new RuntimeException("Silabo no encontrado"));
+        try {            
+            Silabo silabo = silaboRepository.findByIdSilabo(IdSilabo)
+                    .orElseThrow(() -> new RuntimeException("Silabo no encontrado"));
 
-        Map<String, Object> datos = new HashMap<>();
+            Map<String, Object> datosOriginal = silaboCustomRepository.obtenerSilaboBase(IdSilabo);
+            if (datosOriginal == null || datosOriginal.isEmpty()) {
+                throw new RuntimeException("No se encontraron datos base del silabo");
+            }
+            logger.info("Datos base obtenidos correctamente: {}", datosOriginal);
 
-        //Datos de silabo:
-        datos.put("idSilabo", silabo.getIdSilabo());
-        datos.put("nombreDocumentoSilabo", silabo.getNombreDocumentoSilabo());
-        datos.put("areaEstudios", silabo.getAreaEstudios());
-        datos.put("descripcionSilabo", silabo.getDescripcionSilabo());
-        datos.put("estrategiaDidactica", silabo.getEstrategiaDidactica());
-        datos.put("bibliografia", silabo.getBibliografia());
-        datos.put("fechaCreacion", silabo.getFechaCreacion());
-        datos.put("fechaUltimaModificacion", silabo.getFechaUModificacion());
-        datos.put("cantidadUnidades", silabo.getCantidadUnidades());
-        datos.put("nombreCompletoProfesor", silabo.getNombreCompletoProfesor());
-        datos.put("emailProfesor", silabo.getEmailProfesor());    
+            Map<String, Object> datos = new HashMap<>(datosOriginal);
+            datos.put("silabo", silabo.getNombreDocumentoSilabo());
 
-        Curso curso = silabo.getCurso(); 
-        //Datos de Curso:
-        datos.put("codigo", curso.getCodigo());
-        datos.put("nombre", curso.getNombre());
-        datos.put("tipo", curso.getTipo());
-        datos.put("numHorasTeoria", curso.getNumHorasTeoria());
-        datos.put("numHorasPractica", curso.getNumHorasPractica());
-        datos.put("numHorasLaboratorio", curso.getNumHorasLaboratorio());
-        datos.put("numHorasCampo", curso.getNumHorasCampo());
-        datos.put("numCreditos", curso.getNumCreditos());
-        datos.put("ciclo", curso.getCiclo());
-        datos.put("estado", curso.getEstado());
-        datos.put("periodoAcademicoId", curso.getPeriodoacademicoid());
-        datos.put("planEstudiosId", curso.getPlanestudiosid());
-        datos.put("institucionId", curso.getInstitucionid());
-        datos.put("departamentoId", curso.getDepartamentoid());
-        datos.put("sumilla", curso.getSumilla());
-        datos.put("modalidad", curso.getModalidad());
-        datos.put("etiquetas", curso.getEtiquetas());
-        //datos.put("competencias", curso.getCompetencias());
+            // Obtener competencias
+            List<Map<String, Object>> competencias = silaboCustomRepository.obtenerCompetencias(IdSilabo);
+            logger.info("Competencias encontradas: {}", competencias.size());
+            
+            if (competencias != null && !competencias.isEmpty()) {
+                List<String> codigosCompetencias = competencias.stream()
+                        .map(comp -> (String) comp.get("codigo"))
+                        .collect(Collectors.toList());
+                List<String> tipoCompetencias = competencias.stream()
+                        .map(comp -> (String) comp.get("tipo"))
+                        .collect(Collectors.toList());
+                List<String> descripcionesCompetencias = competencias.stream()
+                        .map(comp -> (String) comp.get("descripcion"))
+                        .collect(Collectors.toList());
 
-        return datos;
+
+                datos.put("codCompetencias", codigosCompetencias);
+                datos.put("tipCompetencias", tipoCompetencias);
+                datos.put("desCompetencias", descripcionesCompetencias);
+            } else {
+                logger.warn("No se encontraron competencias para el silabo ID: {}", IdSilabo);
+                datos.put("codCompetencias", List.of());
+                datos.put("tipCompetencias", List.of());
+                datos.put("desCompetencias", List.of());
+            }
+
+            // Obtener prerrequisitos
+            List<Map<String, String>> prerrequisitos = silaboCustomRepository.obtenerPrerrequisitos(IdSilabo);
+            
+            if (prerrequisitos != null && !prerrequisitos.isEmpty()) {
+                List<String> combinacion = prerrequisitos.stream()
+                        .map(prer -> prer.get("codigo_curso") + " - " + prer.get("nombre_curso"))
+                        .collect(Collectors.toList());
+                datos.put("prerrequisitos", combinacion);
+            } else {
+                datos.put("prerrequisitos", List.of());
+            }
+
+            // Obtener logros
+            List<Map<String, Object>> logros = silaboCustomRepository.obtenerLogros(IdSilabo);
+            
+            if (logros != null && !logros.isEmpty()) {
+                List<String> codLogro = new ArrayList<>();
+                List<String> desLogro = new ArrayList<>();
+                
+                for (Map<String, Object> logro : logros) {
+                    String pre = (String) logro.get("pre");
+                    String codigo = (String) logro.get("codigo_logro");
+                    String descripcion = (String) logro.get("descripcion_logro");
+                    
+                    codLogro.add(pre + " - " + codigo);
+                    desLogro.add(descripcion);
+                }
+
+                datos.put("codLogro", codLogro);
+                datos.put("desLogro", desLogro);
+            } else {
+                datos.put("codLogro", List.of());
+                datos.put("desLogro", List.of());
+            }
+
+            logger.info("Procesamiento de datos completado exitosamente. Datos finales: {}", datos);
+            return datos;
+        } catch (Exception e) {
+            logger.error("Error al procesar datos del silabo ID: " + IdSilabo, e);
+            throw new RuntimeException("Error al procesar datos del silabo: " + e.getMessage(), e);
+        }
     }
 }

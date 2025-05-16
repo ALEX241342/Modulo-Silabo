@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface SilaboBaseRepository extends R2dbcRepository<SilaboBase,Long> {
 
-    Mono<Boolean> existsByNombreDocumento(String nombreDocumento);
+    Mono<Boolean> existsByNombreDocumentoSilabo(String nombreDocumentoSilabo);
 
     default Mono<SilaboBase> guardarSoloNombre(String nombreDocumento,Long idCurso) {
         return save(new SilaboBase(nombreDocumento,idCurso));

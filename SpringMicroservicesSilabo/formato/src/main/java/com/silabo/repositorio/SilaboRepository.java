@@ -5,5 +5,5 @@ import java.util.Optional;
 
 public interface SilaboRepository extends JpaRepository<Silabo, Integer> {
         Optional<Silabo> findByIdSilabo(int id);
-
+       
 }

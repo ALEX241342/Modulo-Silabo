@@ -3,9 +3,11 @@ package com.microservicio.services;
 import com.microservicio.entities.SilaboBase;
 import com.microservicio.repositories.SilaboBaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service; // <-- ¡Importante!
 import reactor.core.publisher.Mono;
 
-public class SilaboBaseServicesImpl implements ISilaboBaseService{
+@Service  // <-- Esto hace que Spring registre el bean
+public class SilaboBaseServicesImpl implements ISilaboBaseService {
 
     @Autowired
     private SilaboBaseRepository silaboBaseRepository;
@@ -17,11 +19,12 @@ public class SilaboBaseServicesImpl implements ISilaboBaseService{
 
     @Override
     public Mono<SilaboBase> guardarSilaboIG(Long id, String areaDeEstudio, String nombreDocente, String emailDocente) {
-        return silaboBaseRepository.guardarSilaboIG(id,areaDeEstudio,nombreDocente,emailDocente);
+        return silaboBaseRepository.guardarSilaboIG(id, areaDeEstudio, nombreDocente, emailDocente);
     }
 
     @Override
     public Mono<SilaboBase> crearNuevoSilaboConNombre(String nombreDocumento, Long idCurso) {
-        return silaboBaseRepository.guardarSoloNombre(nombreDocumento,idCurso);
+        return silaboBaseRepository.guardarSoloNombre(nombreDocumento, idCurso);
     }
 }
+

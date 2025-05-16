@@ -21,8 +21,7 @@ public class IBusquedaCursoServicesImpl implements IBusquedaCursoServices {
 
     @Override
     public Flux<DTODatosNombreCurso> buscarPorNombreCursos(String parteNombreCurso) {
-        return busquedaCursoRepository.listarOpcionesPorNombreCurso(parteNombreCurso)
-                .log(); // Registra todos los eventos del Flux
+        return busquedaCursoRepository.listarOpcionesPorNombreCurso(parteNombreCurso).log(); // Registra todos los eventos del Flux
     }
 
     @Override
