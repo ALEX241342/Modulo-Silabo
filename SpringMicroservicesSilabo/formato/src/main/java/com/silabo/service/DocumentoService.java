@@ -86,10 +86,14 @@ public class DocumentoService {
                     String pre = (String) logro.get("pre");
                     String codigo = (String) logro.get("codigo_logro");
                     String descripcion = (String) logro.get("descripcion_logro");
-                    
-                    codLogro.add(pre + " - " + codigo);
+                    if(codigo != null ){
+                    codLogro.add(pre + " - " + codigo);}
+                    else{
+                        codLogro.add(pre+" - " + "null");
+                    }
                     desLogro.add(descripcion);
                 }
+                
 
                 datos.put("codLogro", codLogro);
                 datos.put("desLogro", desLogro);

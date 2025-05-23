@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-@EnableJpaRepositories(basePackages = "com.silabo.repositorio")
+
+@EnableJpaRepositories(basePackages = "com.silabo.repository")
 @EntityScan(basePackages = "com.silabo.entidades")  // también ayuda a detectar tus entidades
 
 @SpringBootApplication
