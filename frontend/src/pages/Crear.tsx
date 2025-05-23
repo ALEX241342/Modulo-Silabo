@@ -7,6 +7,7 @@ export const Crear = () => {
   const [cursos, setCursos] = useState<Curso[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [mensajeExito, setMensajeExito] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [cursoSeleccionado, setCursoSeleccionado] = useState<DTOBusquedaDatosCurso | null>(null);
   const [nombreSilabo, setNombreSilabo] = useState('');
@@ -55,6 +56,7 @@ export const Crear = () => {
         idCurso: Number(cursoIdSeleccionado)
       });
       setError(null);
+      setMensajeExito(`Silabo "${nombreSilabo}" creado correctamente con ID: ${response.idSilabo}`);
       console.log('Silabo creado:', response);
     } catch (err) {
       setError('Error al crear el silabo');
@@ -122,7 +124,22 @@ export const Crear = () => {
                 loading={loading}
                 onChange={(_, newValue) => {
                   if (typeof newValue === 'object' && newValue !== null) {
-                    obtenerDetallesCurso(newValue.id);
+                    console.log(newValue);
+                    obtenerDetallesCurso(newValue.idCurso);
+                  } else {
+                    // Limpiar todos los campos cuando se borra el nombre del curso
+                    setCursoSeleccionado(null);
+                    setCursoIdSeleccionado(null);
+                    setCodigoCurso('');
+                  }
+                }}
+                onInputChange={(_, newInputValue) => {
+                  setSearchTerm(newInputValue);
+                  if (newInputValue === '') {
+                    // Limpiar todos los campos cuando se borra el input
+                    setCursoSeleccionado(null);
+                    setCursoIdSeleccionado(null);
+                    setCodigoCurso('');
                   }
                 }}
                 renderInput={(params) => (
@@ -156,6 +173,12 @@ export const Crear = () => {
                   {error}
                 </Alert>
               )}
+              {mensajeExito && (
+                <Alert severity="success" sx={{ mt: 1 }}>
+                  {mensajeExito}
+                </Alert>
+              )}
+
             </Box>
           </Box>
 
@@ -189,7 +212,7 @@ export const Crear = () => {
                 fullWidth
                 variant="outlined"
                 disabled
-                value={cursoSeleccionado?.tipoDeCurso || ''}
+                value={cursoSeleccionado?.tipoCurso || ''}
                 sx={{
                   bgcolor: '#f5f5f5',
                   '& .MuiOutlinedInput-root': {
@@ -291,7 +314,7 @@ export const Crear = () => {
                   fullWidth
                   variant="outlined"
                   disabled
-                  value={cursoSeleccionado?.numeroDeCreditos || ''}
+                  value={cursoSeleccionado?.numCreditos || ''}
                   sx={{
                     bgcolor: '#f5f5f5',
                     '& .MuiOutlinedInput-root': {

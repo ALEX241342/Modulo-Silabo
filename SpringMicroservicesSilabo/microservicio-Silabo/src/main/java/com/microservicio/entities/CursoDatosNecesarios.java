@@ -7,9 +7,10 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
 @NoArgsConstructor
-@Table(name = "curso")
+@Table(name = "vw_busqueda_de_curso")
 public class CursoDatosNecesarios {
     @Id
+    @Column("id")
     private Long idCurso;
     @Column("codigo")
     private String codigoCurso;
@@ -17,6 +18,10 @@ public class CursoDatosNecesarios {
     private String nombreCurso;
     @Column("tipo")
     private String tipoCurso;
+    @Column("numero_periodo")
+    private String numeroPeriodo;
+    @Column("año")
+    private String anio;
     @Column("numHorasTeoria")
     private int numeroHorasTeoria;
     @Column("numHorasPractica")
@@ -25,8 +30,10 @@ public class CursoDatosNecesarios {
     private String ciclo;
     @Column("sumilla")
     @Setter private String sumilla;
-    @Column("numCreditos")
-    private float numeroCreditos;
+    @Column("creditos")
+    private float numCreditos;
+    @Column("plan_estudios")
+    private String planDeEstudios;
     @Column("modalidad")
     @Setter private String modalidad;
 

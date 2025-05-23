@@ -1,7 +1,5 @@
 package com.microservicio.services;
-
-import com.microservicio.dtos.DTOBusquedaDatosCurso;
-import com.microservicio.dtos.DTODatosNombreCurso;
+import com.microservicio.entities.CursoDatosNecesarios;
 import com.microservicio.repositories.BusquedaCursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +13,17 @@ public class IBusquedaCursoServicesImpl implements IBusquedaCursoServices {
     private BusquedaCursoRepository busquedaCursoRepository;
 
     @Override
-    public Mono<DTOBusquedaDatosCurso> buscarPorCodigoCurso(String codigoCurso) {
+    public Mono<CursoDatosNecesarios> buscarPorCodigoCurso(String codigoCurso) {
         return busquedaCursoRepository.buscarPorCodigoCurso(codigoCurso);
     }
 
     @Override
-    public Flux<DTODatosNombreCurso> buscarPorNombreCursos(String parteNombreCurso) {
-        return busquedaCursoRepository.listarOpcionesPorNombreCurso(parteNombreCurso).log(); // Registra todos los eventos del Flux
+    public Flux<CursoDatosNecesarios> buscarPorNeCursos(String parteNombreCurso) {
+        return busquedaCursoRepository.listarOpcionesPorNombreCurso(parteNombreCurso)
+            .doOnNext(curso -> {
+                System.out.println("Curso encontrado: " + curso);
+                System.out.println("ID del curso: " + curso.getIdCurso());
+            });
     }
 
     @Override

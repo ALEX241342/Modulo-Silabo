@@ -1,6 +1,8 @@
 package com.microservicio.repositories;
 
 import com.microservicio.entities.SilaboBase;
+
+import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
@@ -13,7 +15,7 @@ public interface SilaboBaseRepository extends R2dbcRepository<SilaboBase,Long> {
     Mono<Boolean> existsByNombreDocumentoSilabo(String nombreDocumentoSilabo);
 
     default Mono<SilaboBase> guardarSoloNombre(String nombreDocumento,Long idCurso) {
-        return save(new SilaboBase(nombreDocumento,idCurso));
+        return save(new SilaboBase(nombreDocumento, idCurso));
     }
 
 
@@ -31,5 +33,36 @@ public interface SilaboBaseRepository extends R2dbcRepository<SilaboBase,Long> {
                  });
     }
 
+    
 
+    //Guardar Estrategia Didactica
+    default Mono<SilaboBase> GuardarEstrategiaDidactica(Long id,String estrategiaDidactica) {
+        return findById(id)
+                .switchIfEmpty(Mono.error(
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Sílabo no encontrado")
+                ))
+                .flatMap(silabo -> {
+                    silabo.setEstrategiaDidactica(estrategiaDidactica);
+                    return save(silabo);
+                });
+    }
+
+
+    //Guardar Bibliografia
+    default Mono<SilaboBase> GuardarBibliografia(Long id,String bibliografia) {
+        return findById(id)
+                .switchIfEmpty(Mono.error(
+                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Sílabo no encontrado")
+                ))
+                .flatMap(silabo -> {
+                    silabo.setBibliografia(bibliografia);
+                    return save(silabo);
+                });
+    }
+
+    
+    @Query("SELECT id FROM cursocompetencia WHERE cursoid = :idCurso AND competenciaid = :idCompetencia")
+    Mono<Long> obtenerCursoCompetencia(Long idCurso, Long idCompetencia);
+
+    Mono<SilaboBase> findByNombreDocumentoSilabo(String nombreDocumentoSilabo);
 }

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class SilaboBase {
     @Id
     private Long idSilabo;
-    @Column("nombre_documento")
+    @Column("nombre_documento_silabo")
     @Setter private String nombreDocumentoSilabo;
     @Column("area_estudios")
     @Setter private String areaEstudios;

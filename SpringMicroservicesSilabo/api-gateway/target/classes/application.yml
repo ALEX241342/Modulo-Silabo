@@ -29,6 +29,12 @@ spring:
             - Path=/api/busqueda-curso/**
           filters:
             - StripPrefix=1
+        - id: curso-service
+          uri: lb://microservicio-silabo
+          predicates:
+            - Path=/api/curso/**
+          filters:
+            - StripPrefix=1
 
 eureka:
   client:

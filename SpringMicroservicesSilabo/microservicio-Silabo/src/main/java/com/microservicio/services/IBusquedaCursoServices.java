@@ -1,7 +1,5 @@
 package com.microservicio.services;
-
-import com.microservicio.dtos.DTOBusquedaDatosCurso;
-import com.microservicio.dtos.DTODatosNombreCurso;
+import com.microservicio.entities.CursoDatosNecesarios;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -11,11 +9,11 @@ public interface IBusquedaCursoServices {
 
     // buscar curso por codigo
 
-    Mono<DTOBusquedaDatosCurso> buscarPorCodigoCurso(String codigoCurso);
+    Mono<CursoDatosNecesarios> buscarPorCodigoCurso(String codigoCurso);
 
     // buscar curso por nombre (autocompletado dinamico front)
 
-    Flux<DTODatosNombreCurso> buscarPorNombreCursos(String nombreCurso);
+    Flux<CursoDatosNecesarios> buscarPorNeCursos(String nombreCurso);
 
     Mono<String> buscarCodigoPorNombre(Long id);
 }

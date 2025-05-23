@@ -9,15 +9,25 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "cursoprerrequisito")
 public class CursoPrerrequisito {
     @Id
     private Long idPrerrequisito;
     @Column("id_silabo")
-    private Long idSilabo;
+    @Setter private Long idSilabo;
     @Column("codigo_curso")
     @Setter private String codigoCurso;
     @Column("nombre_curso")
     @Setter private String nombreCurso;
+
+    public CursoPrerrequisito(Long idSilabo, String codigoCurso, String nombreCurso) {
+        this.idSilabo = idSilabo;
+        this.codigoCurso = codigoCurso;
+        this.nombreCurso = nombreCurso;
+    }
 }
+
+
+

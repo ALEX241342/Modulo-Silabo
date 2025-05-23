@@ -4,6 +4,7 @@ import { silaboService } from '../services/silaboService';
 
 export const Imprimir = () => {
   const [idSilabo, setIdSilabo] = useState<string>('');
+  const [nombreSilabo, setNombreSilabo] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -37,7 +38,7 @@ export const Imprimir = () => {
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" sx={{ mb: 3 }}>Imprimir Silabo</Typography>
       
-      <Box sx={{ maxWidth: 400 }}>
+      <Box sx={{ maxWidth: 400, display: 'flex', flexDirection: 'column', gap: 2 }}>
         <TextField
           fullWidth
           label="ID Silabo"
@@ -45,6 +46,13 @@ export const Imprimir = () => {
           onChange={handleInputChange}
           error={!!error}
           helperText={error}
+        />
+        
+        <TextField
+          fullWidth
+          label="Nombre Silabo"
+          value={nombreSilabo}
+          onChange={(e) => setNombreSilabo(e.target.value)}
           sx={{ mb: 2 }}
         />
         
@@ -52,6 +60,12 @@ export const Imprimir = () => {
           variant="contained" 
           onClick={handleImprimir}
           disabled={loading}
+          sx={{
+            bgcolor: '#1a237e',
+            '&:hover': {
+              bgcolor: '#0d47a1',
+            }
+          }}
         >
           {loading ? 'Generando...' : 'Imprimir Silabo'}
         </Button>
